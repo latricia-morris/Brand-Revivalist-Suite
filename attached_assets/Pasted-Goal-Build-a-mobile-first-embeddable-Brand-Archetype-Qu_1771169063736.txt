@@ -1,0 +1,376 @@
+Goal
+
+Build a mobile-first, embeddable Brand Archetype Quiz web app that calculates Primary + Secondary archetypes and gates results behind a simple form (first name + email). Include 3 visual break screens using the provided Tenor GIF links, Meta Pixel tracking, and a social share button.
+
+Inputs Provided
+
+
+
+
+
+Quiz feed (questions + scoring): Use the separate document titled "Brand Archetype Quiz: Questions & Scoring (Replit Feed)".
+
+
+
+Archetypes (canonical 12): Ruler, Hero, Magician, Outlaw, Explorer, Creator, Lover, Caregiver, Everyman, Jester, Sage, Innocent.
+
+Scoring Rules
+
+
+
+
+
+Each question has 6 answers. Each answer awards points to two archetypes.
+
+
+
+Weighting by phase:
+
+
+
+
+
+Q1–Q7: 3 points to each of the two archetypes
+
+
+
+Q8–Q14: 2 points to each of the two archetypes
+
+
+
+Q15–Q18: 1 point to each of the two archetypes
+
+
+
+Output:
+
+
+
+
+
+Primary archetype: highest total points
+
+
+
+Secondary archetype: second-highest total points
+
+
+
+Tie-breaker: if tied, prefer the archetype with the higher total from Q1–Q7; if still tied, use a fixed priority list (Ruler, Hero, Magician, Outlaw, Explorer, Creator, Lover, Caregiver, Everyman, Jester, Sage, Innocent).
+
+Brand & Design Notes (Styling Cues)
+
+
+
+
+
+Primary colors (hex):
+
+
+
+
+
+Deep red: #660000
+
+
+
+Obsidian: #0f0f1a
+
+
+
+Off-white: #f7f5f5
+
+
+
+Gradient: red → obsidian at 131 degrees.
+
+
+
+Typography:
+
+
+
+
+
+Headings: Cormorant Garamond
+
+
+
+Body/UI: Cerebri or Montserrat (choose best fit)
+
+
+
+Rounding: 7px border-radius on buttons, cards, inputs.
+
+
+
+Spacing: not too tight, not too loose; elements should have room to breathe.
+
+
+
+Design reference: https://thebrandrevivalist.com/
+
+Deployment & Hosting
+
+
+
+
+
+Host: WordPress.com (self-hosted, plugin upload enabled)
+
+
+
+Page builder: Elementor
+
+
+
+Embed method: iframe-safe, mobile-responsive, no external script dependencies that could be blocked
+
+
+
+Deliverable: Static HTML/CSS/JS files ready to be wrapped in a WordPress plugin or embedded via Elementor's custom HTML widget / iframe embed
+
+UX Requirements
+
+
+
+
+
+One question per screen.
+
+
+
+Clear progress indicator (e.g., "Question 6 of 18").
+
+
+
+Mobile-first, no scroll traps.
+
+
+
+Designed to embed on WordPress (iframe-safe).
+
+Interstitial / Break Screens (with GIFs)
+
+Insert these screens as full-screen breaks (same overall layout as quiz) and include the GIF.
+
+Break Screen 1 (after intro, before Q1)
+
+Text:
+
+
+
+
+
+Now, we're getting somewhere...
+
+
+
+Let's keep the momentum going.
+GIF link (use this URL, not the embed script):
+
+
+
+https://tenor.com/view/the-office-michael-scott-steve-carell-fist-bump-gif-4439458
+
+Break Screen 2 (after Q7, before Q8)
+
+Text:
+
+
+
+
+
+Homestretch!
+
+
+
+You're doing great. I know this is the part that feels like a lot BUT you're in the homestretch. Think of the wins you're about to use this to stack.
+
+
+
+#timewellspent #letsgo
+
+GIF link:
+
+
+
+
+
+https://tenor.com/view/almost-there-almost-gif-6009178
+
+Break Screen 3 (Results Gate screen, after Q18)
+
+This is the email gate screen (collect name + email). Show the GIF above the form.
+GIF link:
+
+
+
+
+
+https://tenor.com/view/mission-accomplished-gif-11001862194725142192
+Copy:
+
+
+
+Look, most people bail halfway through.
+
+
+
+You?
+
+
+
+You showed up, answered honestly, and just unlocked something powerful.
+
+
+
+You're about to get a free breakdown of your brand archetype: what it means, how it shows up, and exactly how to leverage it to build your brand like a boss.
+
+
+
+But first, I need to know where to send it.
+
+
+
+Drop your info below and let's make this official.
+
+Lead Capture Form
+
+
+
+
+
+Fields: First name, Email
+
+
+
+Validate email format.
+
+
+
+Submit should POST to GoHighLevel webhook (URL will be provided by owner after GHL setup).
+
+GoHighLevel Webhook & Custom Fields
+
+The app will POST a JSON payload to a GHL webhook with the following data structure:
+
+{
+  "first_name": "string",
+  "email": "string",
+  "primary_archetype": "string (archetype name)",
+  "primary_score": "number",
+  "secondary_archetype": "string (archetype name)",
+  "secondary_score": "number",
+  "tag": "string (format: quiz_primary_{primary_archetype_lowercase})",
+  "answers": "string (formatted list of all 18 Q+A pairs, e.g., 'Q1: [answer text]\\nQ2: [answer text]\\n...')"
+}
+
+Owner will map these fields in GHL workflow to:
+
+
+
+
+
+brand_archetype_quiz_highest_category_name ← primary_archetype
+
+
+
+brand_archetype_quiz_highest_category_score ← primary_score
+
+
+
+brand_archetype_quiz__secondary_category_name ← secondary_archetype
+
+
+
+brand_archetype_quiz__secondary_category_score ← secondary_score
+
+
+
+Tag: quiz_primary_{primary_archetype_lowercase}
+
+
+
+Note: answers field
+
+On successful POST: show confirmation screen with primary + secondary results.
+
+Results Screen
+
+
+
+
+
+Display:
+
+
+
+
+
+Primary archetype
+
+
+
+Secondary archetype
+
+
+
+Include a "Share this quiz" button that:
+
+
+
+
+
+Uses Web Share API on mobile (native share sheet)
+
+
+
+Falls back to copy-to-clipboard on desktop
+
+
+
+Share text: "Know your brand archetype? Prove it. Take the quiz."
+
+
+
+Keep copy minimal (the detailed PDF is delivered via email).
+
+Meta Pixel Integration
+
+
+
+
+
+Pixel ID: 1677244690309336
+
+
+
+Track the following events:
+
+
+
+
+
+Lead (when form is submitted successfully)
+
+
+
+Implementation: Add Meta Pixel code to the app header; fire the Lead event on successful form submission.
+
+Technical Notes
+
+
+
+
+
+Prefer vanilla HTML/CSS/JS.
+
+
+
+Store quiz content in a JSON file or JS object (as provided by the feed doc).
+
+
+
+Do not rely on Tenor embed scripts if they cause issues in iframes; use the provided Tenor page URLs as the source reference for the GIF asset.
+
