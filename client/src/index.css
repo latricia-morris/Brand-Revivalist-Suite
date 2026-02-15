@@ -5,26 +5,26 @@
 @tailwind utilities;
 
 :root {
-  --background: 240 25% 8%; /* Obsidian-ish #0f0f1a */
-  --foreground: 0 5% 96%;   /* Off-white #f7f5f5 */
+  --background: 0 0% 97%;   /* Off-white #f7f5f5 */
+  --foreground: 240 25% 8%; /* Obsidian-ish #0f0f1a */
   
   --primary: 0 100% 20%;    /* Deep Red #660000 */
   --primary-foreground: 0 0% 98%;
 
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 0 0% 90%;
+  --secondary-foreground: 240 25% 8%;
 
-  --muted: 240 10% 20%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 0 0% 94%;
+  --muted-foreground: 240 5% 45%;
 
-  --accent: 0 80% 30%;
+  --accent: 0 100% 20%;
   --accent-foreground: 0 0% 98%;
 
   --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 10% 20%;
-  --input: 240 10% 20%;
+  --border: 0 0% 85%;
+  --input: 0 0% 85%;
   --ring: 0 100% 20%;
 
   --radius: 0.4375rem; /* 7px */
@@ -37,46 +37,36 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(131deg, #660000 0%, #0f0f1a 100%);
     min-height: 100vh;
     overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
+    @apply font-serif;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-[#0f0f1a]/80 backdrop-blur-md border border-white/10 shadow-xl;
+    @apply bg-white border border-border shadow-md;
   }
   
   .quiz-btn {
     @apply relative overflow-hidden transition-all duration-300 transform active:scale-[0.98];
   }
-  
-  .quiz-btn::after {
-    content: '';
-    @apply absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300;
-  }
-  
-  .quiz-btn:hover::after {
-    @apply opacity-100;
-  }
 }
 
-/* Custom scrollbar for webkit */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(15, 15, 26, 0.5); 
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(102, 0, 0, 0.5); 
-  border-radius: 4px;
+  background: rgba(102, 0, 0, 0.2); 
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(102, 0, 0, 0.8); 
+  background: rgba(102, 0, 0, 0.4); 
 }
